@@ -1,0 +1,48 @@
+<template>
+  <div class="flex justify-between py-5 md:px-10 items-center">
+    <div>
+      <h3 class="text-xl font-bold">{{ title }}</h3>
+      <span class="text-gray-600">{{ description }}</span>
+    </div>
+    <button
+      v-if="validationAccount"
+      class="btn bg-gray-50 text-red-400 hover:text-red-500"
+    >
+      Desactivar Cuenta
+    </button>
+    <router-link v-if="validationBtn" to="/profile/edit" class="btn btn-black"
+      >Edit</router-link
+    >
+  </div>
+  <hr />
+</template>
+
+<script>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+export default {
+  setup() {
+    const route = useRoute();
+
+    const title = computed(() =>
+      route.path === "/profile/edit" ? "Change Info" : "Profile"
+    );
+
+    const description = computed(() =>
+      route.path === "/profile/edit"
+        ? "Changes will be reflected to every services"
+        : "Some info may be visible to other people"
+    );
+
+    const validationBtn = computed(() =>
+      route.path === "/profile/edit" ? false : true
+    );
+    const validationAccount = computed(() =>
+      route.path === "/profile/edit" ? true : false
+    );
+
+    return { title, description, validationBtn, validationAccount };
+  },
+};
+</script>

@@ -1,0 +1,35 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.input {
+  @apply text-sm text-gray-600 block rounded-md px-2 py-2 my-5 bg-gray-100 w-full outline-none;
+}
+
+.btn {
+  @apply rounded-md px-4 py-2;
+}
+.btn-lg {
+  @apply rounded-md px-10 py-2;
+}
+.btn-blue {
+  @apply bg-blue-500 hover:bg-blue-400 text-gray-50;
+}
+.btn-disabled {
+  @apply bg-gray-100  text-gray-700;
+}
+.btn-black {
+  @apply bg-gray-200 text-gray-800 hover:text-gray-900;
+}
+
+/* form-inputs */
+
+.input-group {
+  @apply w-full border border-gray-400 text-gray-700 placeholder-gray-400 rounded focus:border-gray-300 focus:outline-none  px-3 py-2;
+}
+
+.input {
+  @apply text-sm text-gray-600 block rounded-md px-2 py-2 my-2 bg-gray-100 w-full outline-none;
+}

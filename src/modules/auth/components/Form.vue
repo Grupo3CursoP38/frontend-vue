@@ -3,7 +3,7 @@
     <Inputs :userForm="v$" />
     <button
       :disabled="validateButton(v$)"
-      :class="validateButton(v$) ? 'btn-disabled' : 'btn-blue'"
+      :class="validateButton(v$) ? 'btn-disabled' : 'btn-purple'"
       class="btn-lg"
       type="submit"
     >

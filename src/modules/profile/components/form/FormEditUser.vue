@@ -6,7 +6,7 @@
     <InputsEditUser :userForm="v$" :img="userForm.img" :urlImg="imageUrl" />
     <button
       :disabled="validateButton(v$)"
-      :class="validateButton(v$) ? 'btn-disabled' : 'btn-blue'"
+      :class="validateButton(v$) ? 'btn-disabled' : 'btn-purple'"
       type="submit"
       class="btn"
     >

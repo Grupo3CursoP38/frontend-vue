@@ -1,19 +1,5 @@
 <template>
-  <section
-    class="
-      bg-blue-200
-      flex flex-col
-      justify-center
-      items-start
-      mds:w-8/12
-      xs:px-5
-      md:px-20
-      xs:py-10
-      mds:py-0
-      xs:h-screen
-      md:h-auto
-    "
-  >
+  <section class="bg-blue-200 container-per">
     <h1 class="font-bold xs:text-4xl md:text-6xl mds:w-8/12 mb-7">
       Workspace that inspire
     </h1>

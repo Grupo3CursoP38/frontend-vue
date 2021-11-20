@@ -29,3 +29,10 @@ html::-webkit-scrollbar-track:hover,
 html::-webkit-scrollbar-track:active {
   background: #d4d4d4;
 }
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: 22rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}

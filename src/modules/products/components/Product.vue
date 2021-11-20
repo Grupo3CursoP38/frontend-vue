@@ -25,12 +25,3 @@
     </section>
   </main>
 </template>
-
-<style scoped>
-.grid {
-  display: grid;
-  gap: 1rem;
-  grid-auto-rows: 22rem;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-}
-</style>

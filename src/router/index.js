@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/modules/home/router";
 import Auth from "@/modules/auth/router";
 import Profile from "@/modules/profile/router";
+import Products from "@/modules/products/router";
 
 const routes = [
   {
@@ -15,6 +16,16 @@ const routes = [
   {
     path: "/profile",
     ...Profile,
+  },
+  {
+    path: "/products",
+    ...Products,
+  },
+  {
+    name: "Error",
+    path: "/:pathMatch(.*)*",
+    component: () =>
+      import(/* webpackChunkName: "error" */ "@/global/views/Error.vue"),
   },
 ];
 

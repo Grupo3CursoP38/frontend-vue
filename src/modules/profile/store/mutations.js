@@ -3,3 +3,7 @@ export const cancelRental = (state, payload) => {
     rental.vehicle.id === payload.vehicle.id ? (rental.is_active = false) : null
   );
 };
+
+export const cancelAccount = (state) => {
+  state.user.is_active = false;
+};

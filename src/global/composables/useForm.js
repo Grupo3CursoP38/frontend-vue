@@ -1,19 +1,13 @@
 import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  numeric,
-} from "@vuelidate/validators";
+import { required, email, minLength, numeric } from "@vuelidate/validators";
 
 export function useForm(form) {
   const rules = {
     name: {
       required,
     },
-    bio: {
-      max: maxLength(200),
+    lastname: {
+      required,
     },
     phone: {
       numeric,
@@ -30,6 +24,9 @@ export function useForm(form) {
       required,
     },
     check: {
+      required,
+    },
+    birthdate: {
       required,
     },
   };

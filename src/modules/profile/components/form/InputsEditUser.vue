@@ -1,23 +1,4 @@
 <template>
-  <div class="space-y-2 flex">
-    <img
-      class="rounded-sm mr-4"
-      :src="image"
-      width="50"
-      height="50"
-      :alt="v$.name.$model"
-    />
-    <button type="button" @click="selectImage" class="text-gray-400">
-      CHANGE PHOTO
-    </button>
-    <input
-      ref="fileInput"
-      hidden
-      type="file"
-      accept="image/png, image/jpg, image/jpeg"
-      @change="pickFile"
-    />
-  </div>
   <div class="space-y-2">
     <label for="name" class="block font-medium tracking-tight">Name</label>
     <input
@@ -44,17 +25,54 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label for="bio" class="block font-medium tracking-tight">Bio</label>
-    <textarea
-      v-model.trim="v$.bio.$model"
-      id="bio"
-      maxlength="100"
+    <label for="name" class="block font-medium tracking-tight">Lastname</label>
+    <input
+      v-model.trim="v$.lastname.$model"
+      id="lastname"
+      type="text"
       class="input-group md:w-1/2 block"
-      placeholder="biography"
+      placeholder="lastname"
       autocomplete="off"
-      cols="30"
-      rows="5"
-    ></textarea>
+    />
+    <div
+      v-for="error of v$.lastname.$errors"
+      :key="error.$uid"
+      class="
+        text-xs text-yellow-500
+        bg-yellow-100
+        md:w-1/2
+        py-2
+        px-1
+        rounded-sm
+      "
+    >
+      {{ error.$message }}
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label for="name" class="block font-medium tracking-tight">Birthdate</label>
+    <input
+      v-model.trim="v$.birthdate.$model"
+      id="birthdate"
+      type="date"
+      class="input-group md:w-1/2 block"
+      placeholder="birthdate"
+      autocomplete="off"
+    />
+    <div
+      v-for="error of v$.birthdate.$errors"
+      :key="error.$uid"
+      class="
+        text-xs text-yellow-500
+        bg-yellow-100
+        md:w-1/2
+        py-2
+        px-1
+        rounded-sm
+      "
+    >
+      {{ error.$message }}
+    </div>
   </div>
   <div class="space-y-2">
     <label for="phone" class="block font-medium tracking-tight">Phone</label>
@@ -140,11 +158,6 @@ import { watchEffect } from "vue";
 export default {
   props: {
     userForm: Object,
-    img: {
-      type: String,
-      default: "https://via.placeholder.com/50x50",
-    },
-    urlImg: {},
   },
   setup(props) {
     let v$;
@@ -152,28 +165,6 @@ export default {
       v$ = props.userForm;
     });
     return { v$ };
-  },
-  data() {
-    return {
-      image: this.$props.img,
-    };
-  },
-  methods: {
-    selectImage() {
-      this.$refs.fileInput.click();
-    },
-    pickFile() {
-      let input = this.$refs.fileInput;
-      let file = input.files;
-      if (file && file[0]) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          this.image = e.target.result;
-        };
-        reader.readAsDataURL(file[0]);
-        this.$props.urlImg(file[0]);
-      }
-    },
   },
 };
 </script>

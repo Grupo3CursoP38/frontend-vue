@@ -11,6 +11,13 @@
         class="btn btn-black mr-3"
         >Rental</router-link
       >
+      <button
+        @click="isOpen = true"
+        v-if="validationAccount"
+        class="btn bg-gray-50 text-red-400 hover:text-red-500"
+      >
+        Desactivar Cuenta
+      </button>
       <router-link
         v-if="data.validationEdit"
         to="/profile/edit"
@@ -20,10 +27,14 @@
     </div>
   </div>
   <hr />
+
+  <Modal />
 </template>
 
 <script>
-import { ref } from "vue";
+import Modal from "@/global/components/Modal.vue";
+import { computed, provide, ref } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   props: {
@@ -32,10 +43,23 @@ export default {
       required: true,
     },
   },
+  components: {
+    Modal,
+  },
   setup(props) {
     const data = ref(props.info);
 
-    return { data };
+    const { path } = useRoute();
+
+    const validationAccount = computed(() =>
+      path === "/profile/edit" ? true : false
+    );
+
+    const isOpen = ref(false);
+
+    provide("isOpen", isOpen);
+
+    return { data, validationAccount, isOpen };
   },
 };
 </script>

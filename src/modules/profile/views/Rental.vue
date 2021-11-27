@@ -17,9 +17,8 @@
           validationEdit: false,
         }"
       />
-      <div>
-        <MyRental />
-      </div>
+
+      <MyRental />
     </article>
   </section>
 </template>

@@ -7,9 +7,9 @@
     <div>
       <router-link
         v-if="data.validationPur"
-        to="/profile/my-purchases"
+        to="/profile/my-rental"
         class="btn btn-black mr-3"
-        >Purchases</router-link
+        >Rental</router-link
       >
       <router-link
         v-if="data.validationEdit"

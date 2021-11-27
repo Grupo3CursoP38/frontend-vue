@@ -1,3 +1,3 @@
-// export const getters = (state) => {
-//   return state.it;
-// };
+export const getRental = (state) => {
+  return state.rental;
+};

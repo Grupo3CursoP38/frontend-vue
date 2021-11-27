@@ -1,1 +1,3 @@
-// export const actions = async ({ commit }) => {};
+export const cancelRental = async ({ commit }, payload) => {
+  commit("cancelRental", payload);
+};

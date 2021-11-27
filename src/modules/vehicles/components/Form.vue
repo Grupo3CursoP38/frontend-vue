@@ -78,8 +78,7 @@
 
     <div class="lg:w-3/5 mb-3">
       <label for="check" class="font-light text-gray-600 text-sm cursor-pointer"
-        >Creating an account means you’re okay with our Terms of Service,
-        Privacy Policy</label
+        >you’re okay with our Terms of Service, Privacy Policy</label
       >
     </div>
   </form>

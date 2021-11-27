@@ -2,15 +2,15 @@
   <div class="bg-gray-50">
     <Navbar class="bg-gray-50" />
 
-    <Product />
+    <Vehicles />
   </div>
 </template>
 
 <script>
 import Navbar from "@/global/components/Navbar.vue";
-import Product from "../components/Product.vue";
+import Vehicles from "../components/Vehicles.vue";
 
 export default {
-  components: { Navbar, Product },
+  components: { Navbar, Vehicles },
 };
 </script>

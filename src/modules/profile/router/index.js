@@ -21,5 +21,13 @@ export default {
           /* webpackChunkName: "profile-edit" */ "@/modules/profile/views/Edit.vue"
         ),
     },
+    {
+      path: "my-rental",
+      name: "profile-rental",
+      component: () =>
+        import(
+          /* webpackChunkName: "profile-rental" */ "@/modules/profile/views/Rental.vue"
+        ),
+    },
   ],
 };

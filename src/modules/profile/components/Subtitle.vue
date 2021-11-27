@@ -1,48 +1,41 @@
 <template>
   <div class="flex justify-between py-5 md:px-10 items-center">
     <div>
-      <h3 class="text-xl font-bold">{{ title }}</h3>
-      <span class="text-gray-600">{{ description }}</span>
+      <h3 class="text-xl font-bold">{{ data.title }}</h3>
+      <span class="text-gray-600">{{ data.description }}</span>
     </div>
-    <button
-      v-if="validationAccount"
-      class="btn bg-gray-50 text-red-400 hover:text-red-500"
-    >
-      Desactivar Cuenta
-    </button>
-    <router-link v-if="validationBtn" to="/profile/edit" class="btn btn-black"
-      >Edit</router-link
-    >
+    <div>
+      <router-link
+        v-if="data.validationPur"
+        to="/profile/my-purchases"
+        class="btn btn-black mr-3"
+        >Purchases</router-link
+      >
+      <router-link
+        v-if="data.validationEdit"
+        to="/profile/edit"
+        class="btn btn-black"
+        >Edit</router-link
+      >
+    </div>
   </div>
   <hr />
 </template>
 
 <script>
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 
 export default {
-  setup() {
-    const route = useRoute();
+  props: {
+    info: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    const data = ref(props.info);
 
-    const title = computed(() =>
-      route.path === "/profile/edit" ? "Change Info" : "Profile"
-    );
-
-    const description = computed(() =>
-      route.path === "/profile/edit"
-        ? "Changes will be reflected to every services"
-        : "Some info may be visible to other people"
-    );
-
-    const validationBtn = computed(() =>
-      route.path === "/profile/edit" ? false : true
-    );
-    const validationAccount = computed(() =>
-      route.path === "/profile/edit" ? true : false
-    );
-
-    return { title, description, validationBtn, validationAccount };
+    return { data };
   },
 };
 </script>

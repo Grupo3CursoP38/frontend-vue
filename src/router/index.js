@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/modules/home/router";
 import Auth from "@/modules/auth/router";
 import Profile from "@/modules/profile/router";
-import Products from "@/modules/products/router";
-import ShoppingCart from "@/modules/shoppingCart/router";
+import Vehicles from "@/modules/vehicles/router";
 
 const routes = [
   {
@@ -19,12 +18,8 @@ const routes = [
     ...Profile,
   },
   {
-    path: "/products",
-    ...Products,
-  },
-  {
-    path: "/shopping-cart",
-    ...ShoppingCart,
+    path: "/vehicles",
+    ...Vehicles,
   },
   {
     name: "Error",

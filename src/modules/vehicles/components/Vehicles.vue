@@ -15,7 +15,11 @@
             alt=""
           />
           <div class="px-5 py-5">
-            <h3 class="font-semibold text-lg my-3">{{ vehicle.name }}</h3>
+            <router-link
+              :to="`/vehicles/${slug(vehicle.name)}`"
+              class="font-semibold text-lg my-3 block hover:underline"
+              >{{ vehicle.name }}</router-link
+            >
             <p class="text-gray-600">{{ vehicle.short_description }}</p>
             <div class="my-2 flex justify-between">
               <span>Tipo: {{ vehicle.type }}</span>
@@ -45,7 +49,11 @@ export default {
     const { getters } = useStore();
     const vehicles = computed(() => getters["vehiclesModule/getVehicles"]);
 
-    return { vehicles };
+    const slug = (name) => {
+      return name.toLowerCase().replace(/ /g, "-");
+    };
+
+    return { vehicles, slug };
   },
 };
 </script>

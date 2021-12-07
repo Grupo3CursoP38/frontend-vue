@@ -10,7 +10,7 @@ export default {
       name: "list-vehicles",
       component: () =>
         import(
-          /* webpackChunkName: "list-vehicles" */ "@/modules/vehicles/views/List.vue"
+          /* webpackChunkName: "vehicles" */ "@/modules/vehicles/views/List.vue"
         ),
     },
     {
@@ -18,7 +18,15 @@ export default {
       name: "rental-vehicles",
       component: () =>
         import(
-          /* webpackChunkName: "rental-vehicles" */ "@/modules/vehicles/views/Rental.vue"
+          /* webpackChunkName: "vehicles" */ "@/modules/vehicles/views/Rental.vue"
+        ),
+    },
+    {
+      path: ":id",
+      name: "vehicle",
+      component: () =>
+        import(
+          /* webpackChunkName: "vehicles" */ "@/modules/vehicles/views/Vehicle.vue"
         ),
     },
   ],

@@ -14,9 +14,13 @@
 
 <script>
 import Inputs from "./Inputs";
-import { computed, inject, onMounted } from "vue";
+import { computed, inject, onMounted, provide } from "vue";
 import { useForm } from "@/global/composables/useForm";
 import { useStore } from "vuex";
+import { useMutation } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { DefaultApolloClient } from "@vue/apollo-composable";
+import { apolloClient } from "@/apollo";
 
 export default {
   components: { Inputs },
@@ -26,6 +30,8 @@ export default {
       path === "/auth/sign-in" ? "Sign in" : "Sign up"
     );
     const { state, dispatch } = useStore();
+
+    provide(DefaultApolloClient, apolloClient);
 
     onMounted(() => {
       dispatch("authModule/reset");
@@ -51,7 +57,7 @@ export default {
     const validateButton = computed(() =>
       path === "/auth/sign-in" ? validateButtonLogin : validateButtonRegister
     );
-    const onSubmitRegister = (v$) => {
+    const onSubmitRegister = async (v$) => {
       if (
         v$.password.$invalid ||
         v$.name.$invalid ||
@@ -68,7 +74,38 @@ export default {
         check: v$.check.$model,
       };
       console.log(data);
+
+      const { mutate: CreateUser } = useMutation(
+        gql`
+          mutation CreateUser($user: SignUpInput!) {
+            createUser(user: $user) {
+              refresh
+              access
+            }
+          }
+        `,
+        () => ({
+          variables: {
+            user: {
+              email: data.email,
+              name: data.name,
+              phone: data.phone,
+              lastname: "",
+              birthdate: "",
+              password: data.password,
+              id: 20,
+            },
+          },
+        })
+      );
+
+      CreateUser().then((res) => {
+        console.log(res);
+      });
+
+      // console.log(mutate);
     };
+
     const onSubmitLogin = (v$) => {
       if (v$.password.$invalid || v$.email.$invalid) return;
       const data = {

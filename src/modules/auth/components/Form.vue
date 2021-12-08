@@ -20,6 +20,7 @@ import { useStore } from "vuex";
 import { provideApolloClient, useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { apolloClient } from "@/apollo";
+import { useRouter } from "vue-router";
 
 export default {
   components: { Inputs },
@@ -39,6 +40,8 @@ export default {
     const v$ = useForm(authForm.value);
 
     const msg = inject("msg");
+
+    const { push } = useRouter();
 
     const validateButtonRegister = (v$) => {
       if (
@@ -97,7 +100,7 @@ export default {
               lastname: data.name,
               birthdate: "2000-01-01",
               password: data.password,
-              id: 25,
+              id: 48,
             },
           },
         })
@@ -107,11 +110,14 @@ export default {
         .then((res) => {
           msg.value.message = "Usuario creado";
 
+          localStorage.setItem("setUser", JSON.stringify(res.data.createUser));
+          dispatch("authModule/setUser", res.data.createUser);
+          dispatch("authModule/reset");
           setTimeout(() => {
             msg.value.state = false;
             msg.value.message = "";
+            push({ name: "sign-in" });
           }, 2000);
-          console.error(res);
         })
         .catch((error) => {
           msg.value.message = "El usuario no ha sido creado";
@@ -119,6 +125,7 @@ export default {
           setTimeout(() => {
             msg.value.state = false;
             msg.value.message = "";
+            dispatch("authModule/reset");
           }, 2000);
           console.error(error);
         });

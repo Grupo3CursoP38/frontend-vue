@@ -5,5 +5,9 @@ export const reset = (state, payload) => {
 };
 
 export const setUser = (state, payload) => {
-  state.user = payload;
+  state.user = {
+    access: payload.access,
+    refresh: payload.refresh,
+    data: {},
+  };
 };

@@ -15,20 +15,30 @@
       <span></span>
     </div>
   </section>
+
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
 
 <script>
 import AsideBg from "./AsideBg";
 import Content from "./Content";
 import { useRoute } from "vue-router";
-import { computed, provide } from "vue";
+import { computed, provide, ref } from "vue";
+import Loader from "@/global/components/Loader.vue";
 
 export default {
-  components: { AsideBg, Content },
+  components: { AsideBg, Content, Loader },
 
   setup() {
     const { path } = useRoute();
     provide("path", path);
+
+    const msg = ref({ state: false, message: "" });
+
+    provide(
+      "msg",
+      computed(() => msg.value)
+    );
 
     const text = computed(() =>
       path === "/auth/sign-in" ? "Not a member?" : "Already a member?"
@@ -44,7 +54,7 @@ export default {
       path === "/auth/sign-in" ? "bg-purple-50" : "bg-red-50"
     );
 
-    return { text, sign, color };
+    return { text, sign, color, msg };
   },
 };
 </script>

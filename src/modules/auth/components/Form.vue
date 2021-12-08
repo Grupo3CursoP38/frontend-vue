@@ -14,12 +14,11 @@
 
 <script>
 import Inputs from "./Inputs";
-import { computed, inject, onMounted, provide } from "vue";
+import { computed, inject, onMounted } from "vue";
 import { useForm } from "@/global/composables/useForm";
 import { useStore } from "vuex";
-import { useMutation } from "@vue/apollo-composable";
+import { provideApolloClient, useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "@/apollo";
 
 export default {
@@ -31,13 +30,15 @@ export default {
     );
     const { state, dispatch } = useStore();
 
-    provide(DefaultApolloClient, apolloClient);
+    provideApolloClient(apolloClient);
 
     onMounted(() => {
       dispatch("authModule/reset");
     });
     const authForm = computed(() => state.authModule.form);
-    const v$ = useForm(authForm);
+    const v$ = useForm(authForm.value);
+
+    const msg = inject("msg");
 
     const validateButtonRegister = (v$) => {
       if (
@@ -66,6 +67,9 @@ export default {
         v$.check.$invalid
       )
         return;
+
+      msg.value.state = true;
+
       const data = {
         name: v$.name.$model,
         phone: v$.phone.$model,
@@ -90,20 +94,34 @@ export default {
               email: data.email,
               name: data.name,
               phone: data.phone,
-              lastname: "",
-              birthdate: "",
+              lastname: data.name,
+              birthdate: "2000-01-01",
               password: data.password,
-              id: 20,
+              id: 25,
             },
           },
         })
       );
 
-      CreateUser().then((res) => {
-        console.log(res);
-      });
+      CreateUser()
+        .then((res) => {
+          msg.value.message = "Usuario creado";
 
-      // console.log(mutate);
+          setTimeout(() => {
+            msg.value.state = false;
+            msg.value.message = "";
+          }, 2000);
+          console.error(res);
+        })
+        .catch((error) => {
+          msg.value.message = "El usuario no ha sido creado";
+
+          setTimeout(() => {
+            msg.value.state = false;
+            msg.value.message = "";
+          }, 2000);
+          console.error(error);
+        });
     };
 
     const onSubmitLogin = (v$) => {
@@ -117,7 +135,7 @@ export default {
     const onSubmit = computed(() =>
       path === "/auth/sign-in" ? onSubmitLogin : onSubmitRegister
     );
-    return { text, v$, validateButton, onSubmit };
+    return { text, v$, validateButton, onSubmit, msg };
   },
 };
 </script>

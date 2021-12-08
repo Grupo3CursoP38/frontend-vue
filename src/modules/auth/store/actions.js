@@ -1,5 +1,3 @@
-// export const actions = async ({ commit }) => {};
-
 export const reset = async ({ commit }) => {
   commit("reset", {
     name: "",
@@ -9,4 +7,8 @@ export const reset = async ({ commit }) => {
     password: "",
     check: false,
   });
+};
+
+export const setUser = async ({ commit }, payload) => {
+  commit("setUser", payload);
 };

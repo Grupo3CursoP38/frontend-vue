@@ -1,10 +1,16 @@
 export default () => ({
   form: {
-    name: "",
-    username: "",
-    phone: "",
-    email: "",
-    password: "",
-    check: false,
+    name: "test",
+    username: "test1",
+    phone: "323232",
+    email: "test1@gmail.com",
+    password: "jhon1679",
+    check: true,
+  },
+
+  user: {
+    access: "",
+    refresh: "",
+    data: {},
   },
 });

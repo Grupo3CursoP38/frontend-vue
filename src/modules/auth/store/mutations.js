@@ -8,6 +8,7 @@ export const setUser = (state, payload) => {
   state.user = {
     access: payload.access,
     refresh: payload.refresh,
+    id: payload.id,
     data: {},
   };
 };

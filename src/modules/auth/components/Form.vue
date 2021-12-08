@@ -21,6 +21,7 @@ import { provideApolloClient, useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { apolloClient } from "@/apollo";
 import { useRouter } from "vue-router";
+import jwt_decode from "jwt-decode";
 
 export default {
   components: { Inputs },
@@ -80,7 +81,6 @@ export default {
         password: v$.password.$model,
         check: v$.check.$model,
       };
-      console.log(data);
 
       const { mutate: CreateUser } = useMutation(
         gql`
@@ -107,11 +107,9 @@ export default {
       );
 
       CreateUser()
-        .then((res) => {
+        .then(() => {
           msg.value.message = "Usuario creado";
 
-          localStorage.setItem("setUser", JSON.stringify(res.data.createUser));
-          dispatch("authModule/setUser", res.data.createUser);
           dispatch("authModule/reset");
           setTimeout(() => {
             msg.value.state = false;
@@ -133,11 +131,56 @@ export default {
 
     const onSubmitLogin = (v$) => {
       if (v$.password.$invalid || v$.email.$invalid) return;
+
+      msg.value.state = true;
       const data = {
         email: v$.email.$model,
         password: v$.password.$model,
       };
-      console.log(data);
+
+      const { mutate: LogIn } = useMutation(
+        gql`
+          mutation LogIn($credentials: Credentials!) {
+            logIn(credentials: $credentials) {
+              refresh
+              access
+            }
+          }
+        `,
+        () => ({
+          variables: {
+            credentials: {
+              email: data.email,
+              password: data.password,
+            },
+          },
+        })
+      );
+
+      LogIn()
+        .then((res) => {
+          localStorage.setItem("setUser", JSON.stringify(res.data.logIn));
+          dispatch("authModule/setUser", {
+            ...res.data.logIn,
+            id: jwt_decode(res.data.logIn.refresh).user_id,
+          });
+          dispatch("authModule/reset");
+          setTimeout(() => {
+            msg.value.state = false;
+            msg.value.message = "";
+            push({ name: "profile-home" });
+          }, 2000);
+        })
+        .catch((error) => {
+          msg.value.message = "Ha ocurrido un error en el inicio de sesión";
+
+          setTimeout(() => {
+            msg.value.state = false;
+            msg.value.message = "";
+            dispatch("authModule/reset");
+          }, 2000);
+          console.error(error);
+        });
     };
     const onSubmit = computed(() =>
       path === "/auth/sign-in" ? onSubmitLogin : onSubmitRegister

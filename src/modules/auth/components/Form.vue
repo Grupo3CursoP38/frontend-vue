@@ -159,7 +159,14 @@ export default {
 
       LogIn()
         .then((res) => {
-          localStorage.setItem("setUser", JSON.stringify(res.data.logIn));
+          localStorage.setItem(
+            "setUser",
+            JSON.stringify({
+              ...res.data.logIn,
+              id: jwt_decode(res.data.logIn.refresh).user_id,
+              data: {},
+            })
+          );
           dispatch("authModule/setUser", {
             ...res.data.logIn,
             id: jwt_decode(res.data.logIn.refresh).user_id,

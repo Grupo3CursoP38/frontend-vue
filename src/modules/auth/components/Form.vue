@@ -157,8 +157,8 @@ export default {
       );
 
       LogIn()
-        .then((res) => {
-          localStorage.setItem(
+        .then(async (res) => {
+          await localStorage.setItem(
             "setUser",
             JSON.stringify({
               ...res.data.logIn,

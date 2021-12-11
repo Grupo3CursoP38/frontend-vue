@@ -46,54 +46,17 @@
 <script>
 import { useStore } from "vuex";
 import { computed, onMounted } from "vue";
-import { provideApolloClient, useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import { apolloClient } from "@/apollo";
 
 export default {
   setup() {
     const { state, dispatch } = useStore();
 
-    provideApolloClient(apolloClient);
-
     onMounted(async () => {
-      const { result } = await useQuery(
-        gql`
-          query GetUserById($userId: Int!) {
-            getUserById(userId: $userId) {
-              email
-              name
-              lastname
-              phone
-              birthdate
-            }
-          }
-        `,
-        {
-          userId: localStorage.getItem("setUser")
-            ? JSON.parse(localStorage.getItem("setUser"))?.id
-            : "",
-        }
-      );
-
-      if (result.value !== undefined) {
-        localStorage.setItem(
-          "setUser",
-          JSON.stringify({
-            ...JSON.parse(localStorage.getItem("setUser")),
-            data: {
-              ...result.value.getUserById,
-              is_active: true,
-            },
-          })
-        );
-        dispatch("profileModule/updateProfile", {
-          id: JSON.parse(localStorage.getItem("setUser"))?.id,
-          ...result.value.getUserById,
-          password: "",
-          is_active: true,
-        });
-      }
+      dispatch("profileModule/updateProfile", {
+        ...JSON.parse(localStorage.getItem("setUser")).data,
+        password: "",
+        is_active: true,
+      });
     });
 
     const user = computed(() => {

@@ -9,6 +9,5 @@ export const setUser = (state, payload) => {
     access: payload.access,
     refresh: payload.refresh,
     id: payload.id,
-    data: {},
   };
 };

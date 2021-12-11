@@ -28,10 +28,12 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const { getters, dispatch } = useStore();
+    const { push } = useRouter();
     const token = computed(() => getters["authModule/token"]);
 
     const exit = () => {
@@ -42,6 +44,7 @@ export default {
         id: null,
         data: {},
       });
+      push({ name: "sign-in" });
     };
 
     return { token, exit };

@@ -12,6 +12,7 @@ export async function getRental(id) {
             date_start
             vehicle_id
             user_id
+            is_active
           }
           getVehicles {
             id
@@ -36,7 +37,6 @@ export async function getRental(id) {
       return {
         ...rental,
         vehicle,
-        is_active: true,
       };
     });
 

@@ -80,10 +80,12 @@
       </div>
     </Dialog>
   </TransitionRoot>
+
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
 
 <script>
-import { inject } from "vue";
+import { computed, inject, ref } from "vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -92,9 +94,13 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 import { useStore } from "vuex";
+import { getCancelAccount } from "@/global/helpers/getCancelAccount";
+import { useRouter } from "vue-router";
+import Loader from "@/global/components/Loader.vue";
 
 export default {
   components: {
+    Loader,
     TransitionRoot,
     TransitionChild,
     Dialog,
@@ -105,17 +111,40 @@ export default {
   setup() {
     const isOpen = inject("isOpen");
 
-    const { dispatch } = useStore();
+    const { dispatch, getters } = useStore();
+    const id = computed(() => getters["authModule/getId"]);
+    const msg = ref({ state: false, message: "" });
+
+    const { push } = useRouter();
 
     const closeModal = () => (isOpen.value = false);
     const openModal = () => (isOpen.value = true);
 
     const cancelAccount = async () => {
-      await dispatch("profileModule/cancelAccount");
-      closeModal();
+      await closeModal();
+      msg.value.state = true;
+      const result = await getCancelAccount(id.value);
+
+      if (result.status === 400) {
+        msg.value.message = "No se pudo desactivar la cuenta";
+        setTimeout(() => {
+          msg.value.state = false;
+          msg.value.message = "";
+        }, 2000);
+        return;
+      }
+      msg.value.message = "Se ha desactivado la cuenta";
+
+      setTimeout(async () => {
+        msg.value.state = false;
+        await dispatch("profileModule/cancelAccount");
+        localStorage.clear();
+        push({ name: "sign-in" });
+      }, 2000);
     };
 
     return {
+      msg,
       isOpen,
       cancelAccount,
       closeModal,

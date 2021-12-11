@@ -8,3 +8,7 @@ export const cancelAccount = async ({ commit }) => {
 export const updateProfile = async ({ commit }, payload) => {
   commit("updateProfile", payload);
 };
+
+export const updateRentals = async ({ commit }, payload) => {
+  commit("updateRentals", payload);
+};

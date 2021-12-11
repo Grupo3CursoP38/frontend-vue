@@ -52,12 +52,20 @@
 </template>
 
 <script>
-import { computed } from "vue-demi";
+import { computed, onMounted } from "vue-demi";
 import { useStore } from "vuex";
+import { getRental } from "@/modules/profile/helpers/getRental";
 
 export default {
   setup() {
     const { getters, dispatch } = useStore();
+    const id = computed(() => getters["authModule/getId"]);
+
+    onMounted(async () => {
+      const res = await getRental(id.value);
+
+      dispatch("profileModule/updateRentals", res);
+    });
 
     const rentals = computed(() => getters["profileModule/getRental"]);
 

@@ -124,33 +124,6 @@
       {{ error.$message }}
     </div>
   </div>
-  <div class="space-y-2">
-    <label for="password" class="block font-medium tracking-tight"
-      >Password</label
-    >
-    <input
-      v-model.trim="v$.password.$model"
-      id="password"
-      type="password"
-      class="input-group md:w-1/2 block"
-      placeholder="*********"
-      autocomplete="off"
-    />
-    <div
-      v-for="error of v$.password.$errors"
-      :key="error.$uid"
-      class="
-        text-xs text-yellow-500
-        bg-yellow-100
-        md:w-1/2
-        py-2
-        px-1
-        rounded-sm
-      "
-    >
-      {{ error.$message }}
-    </div>
-  </div>
 </template>
 
 <script>

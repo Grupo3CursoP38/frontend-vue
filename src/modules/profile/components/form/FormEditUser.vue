@@ -13,26 +13,35 @@
       Save Changes
     </button>
   </form>
+
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useForm } from "@/global/composables/useForm";
 import InputsEditUser from "./InputsEditUser.vue";
+import Loader from "@/global/components/Loader.vue";
+import { getUpdate } from "@/modules/profile/helpers/getUpdate";
+import { useRouter } from "vue-router";
 
 export default {
-  components: { InputsEditUser },
+  components: { InputsEditUser, Loader },
   setup() {
-    const userForm = computed(() => {
-      return useStore().state.profileModule.user;
-    });
+    const { state, getters, dispatch } = useStore();
+    const { push } = useRouter();
+
+    const userForm = computed(() => state.profileModule.user);
 
     const v$ = useForm(userForm);
+    const msg = ref({ state: false, message: "" });
+
+    const id = computed(() => getters["authModule/getId"]);
+    const getTokens = computed(() => getters["authModule/getTokens"]);
 
     const validateButton = (v$) => {
       if (
-        v$.password.$invalid ||
         v$.name.$invalid ||
         v$.phone.$invalid ||
         v$.email.$invalid ||
@@ -43,9 +52,8 @@ export default {
       return false;
     };
 
-    const onSubmit = (v$) => {
+    const onSubmit = async (v$) => {
       if (
-        v$.password.$invalid ||
         v$.name.$invalid ||
         v$.phone.$invalid ||
         v$.email.$invalid ||
@@ -54,19 +62,53 @@ export default {
       )
         return;
 
+      msg.value.state = true;
+
       const data = {
         name: v$.name.$model,
         lastname: v$.lastname.$model,
         phone: v$.phone.$model,
         email: v$.email.$model,
-        password: v$.password.$model,
         birthdate: v$.birthdate.$model,
       };
 
-      console.log(data);
+      const result = await getUpdate(data, id.value);
+
+      if (result.status === 400) {
+        msg.value.message = result.message;
+        setTimeout(() => {
+          msg.value.message = "";
+          msg.value.state = false;
+          return;
+        }, 2000);
+      }
+
+      await dispatch("profileModule/updateProfile", {
+        ...result,
+        password: "",
+        is_active: true,
+      });
+      localStorage.setItem(
+        "setUser",
+        JSON.stringify({
+          ...getTokens.value,
+          data: {
+            ...result,
+            is_active: true,
+          },
+        })
+      );
+
+      msg.value.message = "Se ha actualizado correctamente";
+      setTimeout(() => {
+        msg.value.message = "";
+        msg.value.state = false;
+        push({ name: "profile-home" });
+        return;
+      }, 2000);
     };
 
-    return { v$, userForm, validateButton, onSubmit };
+    return { v$, userForm, validateButton, onSubmit, msg };
   },
 };
 </script>

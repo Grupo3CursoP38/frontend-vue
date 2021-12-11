@@ -6,3 +6,11 @@ export const token = (state) => {
     refresh: state.user.refresh,
   };
 };
+
+export const getId = (state) => {
+  return state.user.id;
+};
+
+export const getTokens = (state) => {
+  return state.user;
+};

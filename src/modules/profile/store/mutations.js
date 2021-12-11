@@ -7,3 +7,7 @@ export const cancelRental = (state, payload) => {
 export const cancelAccount = (state) => {
   state.user.is_active = false;
 };
+
+export const updateProfile = (state, payload) => {
+  state.user = payload;
+};

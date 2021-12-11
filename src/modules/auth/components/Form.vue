@@ -100,7 +100,6 @@ export default {
               lastname: data.name,
               birthdate: "2000-01-01",
               password: data.password,
-              id: 48,
             },
           },
         })
@@ -164,7 +163,6 @@ export default {
             JSON.stringify({
               ...res.data.logIn,
               id: jwt_decode(res.data.logIn.refresh).user_id,
-              data: {},
             })
           );
           dispatch("authModule/setUser", {

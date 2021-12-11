@@ -14,6 +14,11 @@ export default {
           "authModule/setUser",
           JSON.parse(localStorage.getItem("setUser"))
         );
+        dispatch("profileModule/updateProfile", {
+          id: JSON.parse(localStorage.getItem("setUser"))?.id,
+          ...JSON.parse(localStorage.getItem("setUser"))?.data,
+          password: "",
+        });
       }
     });
   },

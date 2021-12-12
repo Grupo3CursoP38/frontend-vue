@@ -1,10 +1,25 @@
 <template>
   <nav class="py-3">
-    <div class="xs:w-full md:w-5/6 mx-auto flex justify-between items-center">
+    <div
+      class="
+        xs:w-full
+        md:w-5/6
+        mx-auto
+        md:flex md:justify-between md:items-center
+      "
+    >
       <router-link to="/"
         ><img width="100" height="100" src="@/static/logo.svg" alt="bouncer"
       /></router-link>
-      <div class="flex justify-between items-center">
+      <div
+        class="
+          flex
+          xs:mt-5
+          md:mt-0 md:justify-between
+          xs:justify-center
+          items-center
+        "
+      >
         <router-link
           to="/vehicles"
           class="btn mr-3 hover:text-purple-700"

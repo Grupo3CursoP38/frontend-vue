@@ -2,9 +2,9 @@
   <div class="mx-auto container xs:px-5 md:px-20 my-10">
     <router-link to="/vehicles" class="flex text-blue-400">
       <Icon :path="mdiArrowLeft" :size="24" type="mdi" class="w-5 mr-2" />
-      Back</router-link
+      Volver</router-link
     >
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row mt-5">
       <img class="xs:w-full lg:w-80" :src="vehicle.img_url" alt="iphonex" />
       <div class="flex mt-16 flex-col">
         <h2
@@ -31,22 +31,14 @@
         >
           {{ vehicle.long_description }}
         </p>
-        <div class="lg:w-9/12 w-full lg:pl-20 lg:my-5">
+        <div class="lg:pl-20 my-4">
+          <span class="block">Color: {{ vehicle.color }}</span>
+          <span class="block">Tipo de vehiculo: {{ vehicle.type }}</span>
+          <span class="block mt-3">Vehiculo disponible para rentar 👈</span>
+        </div>
+        <div class="lg:w-9/12 w-full lg:pl-20 lg:my-5 xs:mb-10 lg:mb-0">
           <router-link
-            class="
-              lg:w-1/4
-              w-full
-              rounded-lg
-              bg-purple-700
-              hover:bg-purple-500
-              text-gray-50
-              mt-8
-              lg:mt-0
-              mb-8
-              lg:mb-0
-              p-4
-              shadow-button
-            "
+            class="lg:w-1/4 w-full btn btn-purple block text-center"
             to="/vehicles/rental"
           >
             Rentar

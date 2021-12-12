@@ -1,15 +1,15 @@
 import gql from "graphql-tag";
 import { apolloClient } from "@/apollo";
 
-export async function getCancelRental(id, vehicle_id) {
+export async function getRental(data) {
   try {
     const result = await apolloClient.mutate({
       mutation: gql`
-        mutation FinishRental(
-          $rental: RentalFinish!
+        mutation CreateRental(
+          $rental: RentalInput!
           $vehicle: VehiclePartialUpdate!
         ) {
-          finishRental(rental: $rental) {
+          createRental(rental: $rental) {
             id
             date_finish
             date_start
@@ -23,19 +23,18 @@ export async function getCancelRental(id, vehicle_id) {
         }
       `,
       variables: {
-        rental: {
-          id,
-          is_active: false,
-        },
+        rental: data,
         vehicle: {
-          in_use: false,
-          id: vehicle_id,
+          in_use: true,
+          id: data.vehicle_id,
         },
       },
     });
 
-    return result.data.updateUser;
+    console.log(result);
+
+    return result.data.createRental;
   } catch (error) {
-    return { error, message: "Error al cancelar la renta", status: 400 };
+    return { error, message: "Error al crear la renta", status: 400 };
   }
 }

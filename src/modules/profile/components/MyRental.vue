@@ -83,7 +83,7 @@ export default {
 
     const cancel = async (rental) => {
       msg.value.state = true;
-      const res = await getCancelRental(rental.id);
+      const res = await getCancelRental(rental.id, rental.vehicle.id);
 
       if (res?.status === 400) {
         msg.value.message = "Ocurrio un error al cancelar la renta";

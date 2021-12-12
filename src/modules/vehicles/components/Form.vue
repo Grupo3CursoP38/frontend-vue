@@ -82,6 +82,7 @@
       >
     </div>
   </form>
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
 
 <script>
@@ -90,9 +91,11 @@ import InputDate from "./form/InputDate.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { useForm } from "@/global/composables/useForm";
+import Loader from "@/global/components/Loader.vue";
+import { getRental } from "../helpers/getRental";
 
 export default {
-  components: { InputDate },
+  components: { InputDate, Loader },
   setup() {
     const { getters } = useStore();
     const { push } = useRouter();
@@ -102,6 +105,8 @@ export default {
       () => getters["vehiclesModule/getVehicleType"]
     );
     const user = computed(() => getters["profileModule/getUser"]);
+
+    const msg = ref({ state: false, message: "" });
 
     onMounted(
       () => vehicleId.value === null && push({ name: "list-vehicles" })
@@ -133,7 +138,7 @@ export default {
       return false;
     };
 
-    const onSubmit = (v$) => {
+    const onSubmit = async (v$) => {
       if (
         v$.date_finish.$invalid ||
         v$.date_start.$invalid ||
@@ -143,16 +148,34 @@ export default {
       )
         return;
 
-      console.log({
+      msg.value.state = true;
+
+      const result = await getRental({
         date_finish: v$.date_finish.$model,
         date_start: v$.date_start.$model,
         user_id: v$.user_id.$model,
         vehicle_id: v$.vehicle_id.$model,
         is_active: v$.is_active.$model,
       });
+
+      if (result.status === 400) {
+        msg.value.message = result.message;
+        setTimeout(() => {
+          msg.value.state = false;
+          msg.value.message = "";
+        }, 2000);
+        return;
+      }
+
+      msg.value.message = "Reserva realizada con exito";
+      setTimeout(() => {
+        msg.value.state = false;
+        msg.value.message = "";
+        push({ name: "profile-home" });
+      }, 2000);
     };
 
-    return { v$, validateButton, onSubmit };
+    return { v$, validateButton, onSubmit, msg };
   },
 };
 </script>

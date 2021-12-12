@@ -16,7 +16,7 @@
           />
           <div class="px-5 py-5">
             <router-link
-              :to="`/vehicles/${slug(vehicle.name)}`"
+              :to="`/vehicles/${vehicle.slug}`"
               class="font-semibold text-lg my-3 block hover:underline"
               >{{ vehicle.name }}</router-link
             >
@@ -65,9 +65,7 @@ export default {
       console.log(typeof res);
     });
 
-    const slug = (name) => name.toLowerCase().replace(/ /g, "-");
-
-    return { vehicles, slug, msg };
+    return { vehicles, msg };
   },
 };
 </script>

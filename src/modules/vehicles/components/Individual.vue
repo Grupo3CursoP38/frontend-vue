@@ -1,18 +1,22 @@
 <template>
   <div class="mx-auto container xs:px-5 md:px-20 my-10">
+    <router-link to="/vehicles" class="flex text-blue-400">
+      <Icon :path="mdiArrowLeft" :size="24" type="mdi" class="w-5 mr-2" />
+      Back</router-link
+    >
     <div class="flex flex-col lg:flex-row">
-      <img class="xs:w-full lg:w-80" src="@/static/404.svg" alt="iphonex" />
+      <img class="xs:w-full lg:w-80" :src="vehicle.img_url" alt="iphonex" />
       <div class="flex mt-16 flex-col">
         <h2
           class="
             font-bold
             text-2xl
-            lg:text-6xl
+            lg:text-5xl
             text-center
             lg:text-left lg:pl-20
           "
         >
-          Iphone X
+          {{ vehicle.name }}
         </h2>
         <p
           class="
@@ -25,10 +29,7 @@
             lg:pl-20
           "
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-          consequatur rerum reprehenderit itaque. Labore necessitatibus eveniet,
-          officia repellat delectus vel, quam, minus dolore magni impedit veniam
-          earum deleniti illo veritatis?
+          {{ vehicle.long_description }}
         </p>
         <div class="lg:w-9/12 w-full lg:pl-20 lg:my-5">
           <button
@@ -53,4 +54,41 @@
       </div>
     </div>
   </div>
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
+
+<script>
+import { computed, onMounted, ref } from "vue-demi";
+import { useStore } from "vuex";
+import Icon from "@jamescoyle/vue-icon";
+import { mdiArrowLeft } from "@mdi/js";
+import { useRoute, useRouter } from "vue-router";
+import { getVehicles } from "../helpers/getVehicles";
+import Loader from "@/global/components/Loader.vue";
+
+export default {
+  components: { Icon, Loader },
+  setup() {
+    const { getters, dispatch } = useStore();
+    const { path } = useRoute();
+    const { push } = useRouter();
+    const vehicle = computed(() => getters["vehiclesModule/getVehicle"]);
+    const msg = ref({ state: false, message: "" });
+
+    onMounted(async () => {
+      msg.value.state = true;
+      const res = await getVehicles();
+
+      const vehicleRes = await res.filter(
+        (vehicle) => vehicle.slug === path.replace("/vehicles/", "")
+      )[0];
+      vehicleRes === undefined && (await push({ name: "Error" }));
+
+      await dispatch("vehiclesModule/setVehicle", vehicleRes);
+      msg.value.state = false;
+    });
+
+    return { vehicle, mdiArrowLeft, msg };
+  },
+};
+</script>

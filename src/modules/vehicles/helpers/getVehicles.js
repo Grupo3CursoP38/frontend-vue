@@ -24,8 +24,10 @@ export async function getVehicles() {
 
     const vehicles = getVehicles.filter((vehicle) => vehicle.in_use === false);
 
-    console.log(vehicles);
-    return vehicles;
+    return vehicles.map((vehicle) => ({
+      ...vehicle,
+      slug: vehicle.name.toLowerCase().replace(/ /g, "-"),
+    }));
   } catch (error) {
     return { error, message: "Error al obtener los vehiculos", status: 400 };
   }

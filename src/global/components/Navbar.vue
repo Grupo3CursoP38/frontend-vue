@@ -5,20 +5,32 @@
         ><img width="100" height="100" src="@/static/logo.svg" alt="bouncer"
       /></router-link>
       <div class="flex justify-between items-center">
+        <router-link
+          to="/vehicles"
+          class="btn mr-3 hover:text-purple-700"
+          v-if="token.exist"
+          >Vehiculos</router-link
+        >
+        <router-link
+          to="/profile"
+          class="btn mr-3 hover:text-purple-700"
+          v-if="token.exist"
+          >Perfil</router-link
+        >
         <button @click="exit" class="btn btn-purple mr-3" v-if="token.exist">
-          Exit
+          Salir
         </button>
         <router-link
           v-if="!token.exist"
           to="/auth/sign-in"
           class="btn btn-black mr-3"
-          >Login</router-link
+          >Iniciar sesión</router-link
         >
         <router-link
           v-if="!token.exist"
           to="/auth/sign-up"
           class="btn btn-purple"
-          >Sign up</router-link
+          >Crear cuenta</router-link
         >
       </div>
     </div>

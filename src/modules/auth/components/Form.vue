@@ -28,7 +28,7 @@ export default {
   setup() {
     const path = inject("path");
     const text = computed(() =>
-      path === "/auth/sign-in" ? "Sign in" : "Sign up"
+      path === "/auth/sign-in" ? "Iniciar sesión" : "Crear una cuenta"
     );
     const { state, dispatch } = useStore();
 

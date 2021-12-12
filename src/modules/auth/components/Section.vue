@@ -41,13 +41,13 @@ export default {
     );
 
     const text = computed(() =>
-      path === "/auth/sign-in" ? "Not a member?" : "Already a member?"
+      path === "/auth/sign-in" ? "¿No es un miembro? " : "¿Ya eres usuario?"
     );
 
     const sign = computed(() =>
       path === "/auth/sign-in"
-        ? { path: "/auth/sign-up", text: "Sign up now" }
-        : { path: "/auth/sign-in", text: "Sign in" }
+        ? { path: "/auth/sign-up", text: "Regístrate ahora" }
+        : { path: "/auth/sign-in", text: "Iniciar sesión" }
     );
 
     const color = computed(() =>

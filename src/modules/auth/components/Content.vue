@@ -16,7 +16,7 @@
 
     <span class="flex items-center h-5 text-gray-400">
       <hr class="w-6/12 mr-3 border-gray-300" />
-      Or
+      O
       <hr class="w-6/12 ml-3 border-gray-300" />
     </span>
 
@@ -34,7 +34,7 @@ export default {
     const path = inject("path");
 
     const text = computed(() =>
-      path === "/auth/sign-in" ? "Sign in to" : "Sign up to"
+      path === "/auth/sign-in" ? "Iniciar sesión en" : "Registrarse en"
     );
 
     return { text };

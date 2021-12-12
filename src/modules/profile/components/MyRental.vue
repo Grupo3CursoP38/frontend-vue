@@ -1,4 +1,7 @@
 <template>
+  <section v-if="rentals.length === 0" class="my-5 text-center">
+    No tienes rentas Activas en este momento
+  </section>
   <div v-for="rental in rentals" :key="rental.user">
     <section v-if="isActive(rental)" class="md:mx-10 mt-3 mb-5">
       <hr class="pb-2" />
@@ -49,15 +52,31 @@
       </div>
     </section>
   </div>
+  <Loader v-if="msg.state" :msg="msg.message" />
 </template>
 
 <script>
-import { computed } from "vue-demi";
+import { computed, onMounted, ref } from "vue-demi";
 import { useStore } from "vuex";
+import { getRental } from "@/modules/profile/helpers/getRental";
+import { getCancelRental } from "@/modules/profile/helpers/getCancelRental";
+import Loader from "@/global/components/Loader.vue";
 
 export default {
+  components: { Loader },
   setup() {
     const { getters, dispatch } = useStore();
+    const id = computed(() => getters["authModule/getId"]);
+    const msg = ref({ state: false, message: "" });
+
+    onMounted(async () => {
+      const res = await getRental(id.value);
+
+      dispatch(
+        "profileModule/updateRentals",
+        res.filter((rental) => rental.is_active)
+      );
+    });
 
     const rentals = computed(() => getters["profileModule/getRental"]);
 
@@ -68,13 +87,32 @@ export default {
           (1000 * 60 * 60 * 24)
       );
 
-    const cancel = (rental) => {
-      dispatch("profileModule/cancelRental", rental);
+    const cancel = async (rental) => {
+      msg.value.state = true;
+      const res = await getCancelRental(rental.id, rental.vehicle.id);
+
+      if (res?.status === 400) {
+        msg.value.message = "Ocurrio un error al cancelar la renta";
+
+        setTimeout(() => {
+          msg.value.state = true;
+          msg.value.message = "";
+        }, 2000);
+        return;
+      }
+
+      msg.value.message = "Renta cancelada";
+
+      setTimeout(() => {
+        msg.value.state = false;
+        msg.value.message = "";
+        dispatch("profileModule/cancelRental", rental);
+      }, 2000);
     };
 
     const isActive = (rental) => rental.is_active;
 
-    return { rentals, date, cancel, isActive };
+    return { rentals, date, cancel, isActive, msg };
   },
 };
 </script>

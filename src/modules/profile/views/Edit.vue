@@ -5,14 +5,14 @@
     <div class="xs:w-full md:w-5/6 mx-auto md:pb-5">
       <router-link to="/profile" class="flex text-blue-400">
         <Icon :path="mdiArrowLeft" :size="24" type="mdi" class="w-5 mr-2" />
-        Back</router-link
+        Volver</router-link
       >
     </div>
     <article class="md:border-2 xs:w-full md:w-5/6 mx-auto mb-10 rounded-sm">
       <Subtitle
         :info="{
-          title: 'Change Info',
-          description: 'Changes will be reflected to every services',
+          title: 'Cambiar información',
+          description: 'Los cambios se reflejarán en todos los servicios.',
           validationPur: false,
           validationEdit: false,
         }"

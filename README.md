@@ -2,7 +2,7 @@
 
 Vue.js es un framework de JavaScript de código abierto para la construcción de interfaces de usuario y aplicaciones de una sola página. Fue creado por Evan You, y es mantenido por él y por el resto de los miembros activos del equipo central que provienen de diversas empresas como Netlify y Netguru.
 
-Esta aplicación es un componente web (cliente) el cual consumirá una [api gateway](https://github.com/Grupo3CursoP38/api-gateway).
+Esta aplicación es un componente web (cliente) el cual consumirá una [api gateway](https://github.com/Grupo3CursoP38/api-gateway)..
 
 <div style="text-align: center; display:flex; gap:1rem;">
   <img src="https://pbs.twimg.com/profile_images/1386480173613076484/FRbS-TaM_400x400.jpg" width="176" style="border-radius: 15px;">

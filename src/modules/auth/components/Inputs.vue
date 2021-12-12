@@ -1,7 +1,7 @@
 <template>
   <section v-if="path === '/auth/sign-up'" class="flex w-full gap-3">
     <div class="w-1/2 mb-3">
-      <label class="font-bold border-gray-900" for="name">Name</label>
+      <label class="font-bold border-gray-900" for="name">Nombre</label>
       <input
         v-model.trim="v$.name.$model"
         class="input"
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="w-1/2 mb-3">
-      <label class="font-bold border-gray-900" for="username">Phone</label>
+      <label class="font-bold border-gray-900" for="username">Celular</label>
       <input
         v-model.trim="v$.phone.$model"
         class="input"
@@ -50,7 +50,9 @@
     </div>
   </section>
   <div class="mb-3">
-    <label class="font-bold border-gray-900" for="email">Email Address</label>
+    <label class="font-bold border-gray-900" for="email"
+      >Correo electrónico</label
+    >
     <input
       v-model.trim="v$.email.$model"
       class="input"
@@ -67,13 +69,13 @@
     </div>
   </div>
   <div class="mb-3">
-    <label class="font-bold border-gray-900" for="password">Password</label>
+    <label class="font-bold border-gray-900" for="password">Contraseña</label>
     <input
       class="input"
       v-model.trim="v$.password.$model"
       id="password"
       type="password"
-      placeholder="6+ characters"
+      placeholder="6+ caracteres"
     />
     <div
       v-for="error of v$.password.$errors"
@@ -91,8 +93,9 @@
       class="mr-2 w-4 h-4 cursor-pointer"
     />
     <label for="check" class="font-light text-gray-600 text-sm cursor-pointer"
-      >Creating an account means you’re okay with our Terms of Service, Privacy
-      Policy</label
+      >Crear una cuenta significa que está de acuerdo con nuestros Términos de
+      servicio , Política de privacidad y nuestra Configuración de notificación
+      predeterminada .</label
     >
   </div>
 </template>

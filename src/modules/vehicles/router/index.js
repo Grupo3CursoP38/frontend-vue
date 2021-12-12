@@ -20,6 +20,9 @@ export default {
         import(
           /* webpackChunkName: "vehicles" */ "@/modules/vehicles/views/Rental.vue"
         ),
+      meta: {
+        auth: true,
+      },
     },
     {
       path: ":id",

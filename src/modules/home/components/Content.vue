@@ -1,15 +1,16 @@
 <template>
   <section class="bg-blue-200 container-per">
     <h1 class="font-bold xs:text-4xl md:text-6xl mds:w-8/12 mb-7">
-      Workspace that inspire
+      Bienvenido a Rentme! 🎉
     </h1>
     <p class="mds:w-9/12 mb-6">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et,
-      lectus sit lorem id integer.
+      Una manera diferente de alquilar bicicletas y/o patinetas.
     </p>
-    <img src="@/static/CTA.svg" alt="" />
+    <router-link to="/auth/sign-up" class="btn-lg btn-purple"
+      >Comenzar</router-link
+    >
   </section>
   <aside class="mds:w-4/12 xs:hidden md:block">
-    <img src="@/static/hero.jpg" alt="" class="w-full" />
+    <img src="@/static/hero.jpg" alt="" class="w-full h-full" />
   </aside>
 </template>

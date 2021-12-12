@@ -7,4 +7,11 @@ export default () => ({
     password: "",
     check: false,
   },
+
+  user: {
+    access: "",
+    refresh: "",
+    id: null,
+    data: {},
+  },
 });

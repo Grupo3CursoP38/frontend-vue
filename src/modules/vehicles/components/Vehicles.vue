@@ -1,6 +1,6 @@
 <template>
   <main class="container mx-auto">
-    <h1 class="text-center font-bold text-2xl my-5">Products List</h1>
+    <h1 class="text-center font-bold text-2xl my-5">Vehiculos disponibles</h1>
     <div class="grid-section">
       <section v-for="vehicle in vehicles" :key="vehicle.id">
         <article

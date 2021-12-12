@@ -33,7 +33,7 @@
         {{ error.$message }}
       </div>
     </div>
-    <span class="mx-4 text-gray-500 xs:my-3 md:my-0 xs:block">to</span>
+    <span class="mx-4 text-gray-500 xs:my-3 md:my-0 xs:block">a</span>
     <div class="relative">
       <div
         class="

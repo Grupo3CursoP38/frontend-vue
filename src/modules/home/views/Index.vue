@@ -2,7 +2,7 @@
   <div class="h-screen overflow-hidden">
     <Navbar class="container mx-auto" />
 
-    <main class="mds:flex mds:justify-between w-full">
+    <main class="mds:flex mds:justify-between w-full h-full">
       <Content />
     </main>
   </div>

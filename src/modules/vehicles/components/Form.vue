@@ -63,7 +63,9 @@
       </select>
     </div>
     <div class="lg:w-3/5 mb-3">
-      <label class="font-light text-gray-500 text-sm" for="email">Fecha*</label>
+      <label class="font-light text-gray-500 text-sm" for="email"
+        >Fecha de entrega*</label
+      >
       <InputDate />
     </div>
 
@@ -77,8 +79,12 @@
     </button>
 
     <div class="lg:w-3/5 mb-3">
-      <label for="check" class="font-light text-gray-600 text-sm cursor-pointer"
-        >you’re okay with our Terms of Service, Privacy Policy</label
+      <label
+        for="check"
+        class="font-light text-gray-600 text-sm cursor-pointer"
+      >
+        está de acuerdo con nuestros Términos de servicio, Política de
+        privacidad</label
       >
     </div>
   </form>

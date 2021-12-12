@@ -116,7 +116,7 @@ export default {
             push({ name: "sign-in" });
           }, 2000);
         })
-        .catch((error) => {
+        .catch(() => {
           msg.value.message = "El usuario no ha sido creado";
 
           setTimeout(() => {
@@ -124,7 +124,6 @@ export default {
             msg.value.message = "";
             dispatch("authModule/reset");
           }, 2000);
-          console.error(error);
         });
     };
 
@@ -176,7 +175,7 @@ export default {
             push({ name: "profile-home" });
           }, 2000);
         })
-        .catch((error) => {
+        .catch(() => {
           msg.value.message = "Ha ocurrido un error en el inicio de sesión";
 
           setTimeout(() => {
@@ -184,7 +183,6 @@ export default {
             msg.value.message = "";
             dispatch("authModule/reset");
           }, 2000);
-          console.error(error);
         });
     };
     const onSubmit = computed(() =>

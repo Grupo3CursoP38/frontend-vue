@@ -111,6 +111,7 @@ export default {
       () => getters["vehiclesModule/getVehicleType"]
     );
     const user = computed(() => getters["profileModule/getUser"]);
+    const id = computed(() => getters["authModule/getId"]);
 
     const msg = ref({ state: false, message: "" });
 
@@ -124,7 +125,7 @@ export default {
       type: vehicleType.value,
       date_finish: "",
       date_start: "",
-      user_id: user.value.id,
+      user_id: id.value,
       vehicle_id: vehicleId.value,
       is_active: true,
     });

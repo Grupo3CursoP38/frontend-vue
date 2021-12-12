@@ -63,13 +63,12 @@ export default {
       msg.value.state = true;
       const res = await getVehicles();
 
-      dispatch("vehiclesModule/setVehicles", res);
+      await dispatch("vehiclesModule/setVehicles", res);
       msg.value.state = false;
-      console.log(typeof res);
     });
 
-    const rental = (vehicle) => {
-      dispatch("vehiclesModule/setVehicle", vehicle);
+    const rental = async (vehicle) => {
+      await dispatch("vehiclesModule/setVehicle", vehicle);
       return push({ name: "rental-vehicles" });
     };
 

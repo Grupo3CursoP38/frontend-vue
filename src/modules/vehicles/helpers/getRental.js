@@ -31,8 +31,6 @@ export async function getRental(data) {
       },
     });
 
-    console.log(result);
-
     return result.data.createRental;
   } catch (error) {
     return { error, message: "Error al crear la renta", status: 400 };

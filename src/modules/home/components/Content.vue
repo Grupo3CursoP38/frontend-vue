@@ -4,7 +4,7 @@
       Bienvenido a Rentme! 🎉
     </h1>
     <p class="mds:w-9/12 mb-6">
-      Una manera diferente de aquilar bicicletas y/o patinetas.
+      Una manera diferente de alquilar bicicletas y/o patinetas.
     </p>
     <router-link to="/auth/sign-up" class="btn-lg btn-purple"
       >Comenzar</router-link

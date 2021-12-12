@@ -103,7 +103,7 @@ import { getRental } from "../helpers/getRental";
 export default {
   components: { InputDate, Loader },
   setup() {
-    const { getters } = useStore();
+    const { getters, dispatch } = useStore();
     const { push } = useRouter();
 
     const vehicleId = computed(() => getters["vehiclesModule/getVehicleId"]);
@@ -175,6 +175,7 @@ export default {
       }
 
       msg.value.message = "Reserva realizada con exito";
+      await dispatch("profileModule/setRental");
       setTimeout(() => {
         msg.value.state = false;
         msg.value.message = "";

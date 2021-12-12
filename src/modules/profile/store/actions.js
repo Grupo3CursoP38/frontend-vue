@@ -12,3 +12,7 @@ export const updateProfile = async ({ commit }, payload) => {
 export const updateRentals = async ({ commit }, payload) => {
   commit("updateRentals", payload);
 };
+
+export const setRental = async ({ commit }) => {
+  commit("setRental");
+};

@@ -1,6 +1,6 @@
 export const cancelRental = (state, payload) => {
-  state.rental.forEach((rental) =>
-    rental.vehicle.id === payload.vehicle.id ? (rental.is_active = false) : null
+  state.rental = state.rental.filter(
+    (rental) => rental.vehicle.id !== payload.vehicle.id
   );
 };
 

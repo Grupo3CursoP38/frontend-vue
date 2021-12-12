@@ -1,4 +1,7 @@
 <template>
+  <section v-if="rentals.length === 0" class="my-5 text-center">
+    No tienes rentas Activas en este momento
+  </section>
   <div v-for="rental in rentals" :key="rental.user">
     <section v-if="isActive(rental)" class="md:mx-10 mt-3 mb-5">
       <hr class="pb-2" />
@@ -69,7 +72,10 @@ export default {
     onMounted(async () => {
       const res = await getRental(id.value);
 
-      dispatch("profileModule/updateRentals", res);
+      dispatch(
+        "profileModule/updateRentals",
+        res.filter((rental) => rental.is_active)
+      );
     });
 
     const rentals = computed(() => getters["profileModule/getRental"]);

@@ -10,7 +10,7 @@
       type="submit"
       class="btn"
     >
-      Save Changes
+      Guardar cambios
     </button>
   </form>
 

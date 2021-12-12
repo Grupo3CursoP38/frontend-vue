@@ -9,7 +9,7 @@
         v-if="data.validationPur"
         to="/profile/my-rental"
         class="btn btn-black mr-3"
-        >Rental</router-link
+        >Mis rentas</router-link
       >
       <button
         @click="isOpen = true"
@@ -22,7 +22,7 @@
         v-if="data.validationEdit"
         to="/profile/edit"
         class="btn btn-black"
-        >Edit</router-link
+        >Editar</router-link
       >
     </div>
   </div>

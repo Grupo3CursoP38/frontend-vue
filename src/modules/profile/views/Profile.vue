@@ -5,8 +5,9 @@
     <article class="md:border-2 xs:w-full md:w-5/6 mx-auto mb-10 rounded-sm">
       <Subtitle
         :info="{
-          title: 'Profile',
-          description: 'Some info may be visible to other people',
+          title: 'Perfil',
+          description:
+            'Alguna información puede ser visible para otras personas',
           validationPur: true,
           validationEdit: true,
         }"

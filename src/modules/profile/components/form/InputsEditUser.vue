@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <label for="name" class="block font-medium tracking-tight">Name</label>
+    <label for="name" class="block font-medium tracking-tight">Nombre</label>
     <input
       v-model.trim="v$.name.$model"
       id="name"
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label for="name" class="block font-medium tracking-tight">Lastname</label>
+    <label for="name" class="block font-medium tracking-tight">Apellido</label>
     <input
       v-model.trim="v$.lastname.$model"
       id="lastname"
@@ -50,7 +50,9 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label for="name" class="block font-medium tracking-tight">Birthdate</label>
+    <label for="name" class="block font-medium tracking-tight"
+      >Fecha de nacimiento</label
+    >
     <input
       v-model.trim="v$.birthdate.$model"
       id="birthdate"
@@ -75,7 +77,7 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label for="phone" class="block font-medium tracking-tight">Phone</label>
+    <label for="phone" class="block font-medium tracking-tight">Teléfono</label>
     <input
       v-model.trim="v$.phone.$model"
       id="phone"
@@ -100,7 +102,9 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label for="email" class="block font-medium tracking-tight">Email</label>
+    <label for="email" class="block font-medium tracking-tight"
+      >Correo electrónico</label
+    >
     <input
       v-model.trim="v$.email.$model"
       id="email"

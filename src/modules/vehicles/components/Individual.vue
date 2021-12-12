@@ -32,7 +32,7 @@
           {{ vehicle.long_description }}
         </p>
         <div class="lg:w-9/12 w-full lg:pl-20 lg:my-5">
-          <button
+          <router-link
             class="
               lg:w-1/4
               w-full
@@ -47,9 +47,10 @@
               p-4
               shadow-button
             "
+            to="/vehicles/rental"
           >
             Rentar
-          </button>
+          </router-link>
         </div>
       </div>
     </div>

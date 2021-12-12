@@ -1,7 +1,7 @@
 export default () => ({
   vehicles: [
     {
-      id: 1,
+      id: 0,
       name: "deportiva test",
       short_description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
@@ -16,7 +16,7 @@ export default () => ({
   ],
 
   vehicle: {
-    id: 1,
+    id: null,
     name: "deportiva test",
     short_description:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",

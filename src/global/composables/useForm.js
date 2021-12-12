@@ -29,6 +29,24 @@ export function useForm(form) {
     birthdate: {
       required,
     },
+    type: {},
+    date_finish: {
+      required,
+    },
+    date_start: {
+      required,
+    },
+    user_id: {
+      required,
+      numeric,
+    },
+    vehicle_id: {
+      required,
+      numeric,
+    },
+    is_active: {
+      required,
+    },
   };
 
   const v$ = useVuelidate(rules, form);

@@ -4,3 +4,9 @@ export const getVehicles = (state) => {
 export const getVehicle = (state) => {
   return state.vehicle;
 };
+export const getVehicleId = (state) => {
+  return state.vehicle.id;
+};
+export const getVehicleType = (state) => {
+  return state.vehicle.type;
+};

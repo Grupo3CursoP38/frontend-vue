@@ -24,6 +24,7 @@
             <div class="my-2 flex justify-between">
               <span>Tipo: {{ vehicle.type }}</span>
               <button
+                @click="rental(vehicle)"
                 class="
                   hover:text-purple-500
                   underline
@@ -47,11 +48,13 @@ import { computed, onMounted, ref } from "vue-demi";
 import { useStore } from "vuex";
 import { getVehicles } from "../helpers/getVehicles";
 import Loader from "@/global/components/Loader.vue";
+import { useRouter } from "vue-router";
 
 export default {
   components: { Loader },
   setup() {
     const { getters, dispatch } = useStore();
+    const { push } = useRouter();
     const vehicles = computed(() => getters["vehiclesModule/getVehicles"]);
 
     const msg = ref({ state: false, message: "" });
@@ -65,7 +68,12 @@ export default {
       console.log(typeof res);
     });
 
-    return { vehicles, msg };
+    const rental = (vehicle) => {
+      dispatch("vehiclesModule/setVehicle", vehicle);
+      return push({ name: "rental-vehicles" });
+    };
+
+    return { vehicles, msg, rental };
   },
 };
 </script>
